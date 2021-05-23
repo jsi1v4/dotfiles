@@ -3,3 +3,5 @@
 [user]
 	name = Jose Silva
 	email = me@jsi1v4.dev
+[init]
+	defaultBranch = main
