@@ -92,7 +92,7 @@ selection:
   save_to_clipboard: false
 
 cursor:
-  style: Block
+  style: Beam
   vi_mode_style: None
   unfocused_hollow: true
   thickness: 0.15
@@ -108,12 +108,6 @@ mouse:
   triple_click: { threshold: 300 }
 
   hide_when_typing: false
-
-  url:
-    launcher:
-      program: xdg-open
-
-    modifiers: None
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
