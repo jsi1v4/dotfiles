@@ -5,7 +5,7 @@ fi
 
 ## configs
 export LANG="en_US.UTF-8"
-export EDITOR="nano"
+export EDITOR="micro"
 export PATH="${PATH}:/opt/vscode/bin"
 #export ARCHFLAGS="-arch x86_64"
 

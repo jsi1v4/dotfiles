@@ -123,16 +123,13 @@ gaps outer 16
 exec --no-startup-id xcompmgr &
 
 # restore wallpaper config
-exec --no-startup-id feh --bg-fill ~/pictures/wallpapers/current.jpg
+exec --no-startup-id feh --bg-fill $HOME/pictures/wallpapers/current.jpg
 
 # lock screen config
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -i ~/pictures/wallpapers/lock.png
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -i $HOME/pictures/wallpapers/lock.png
 
 # restore redshift
 exec --no-startup-id redshift -O 4500
-
-# xorg extra config
-exec --no-startup-id xrdb -merge ~/.Xresources
 
 # start i3bar to display a workspace bar
 bar {
