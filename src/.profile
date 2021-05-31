@@ -11,3 +11,4 @@ export PATH="${PATH}:/opt/vscode/bin"
 
 ## alias
 alias la="ls -la"
+alias pacsave="pacman -Qt > $HOME/.my-packages"
