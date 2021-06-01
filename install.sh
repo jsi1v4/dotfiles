@@ -45,8 +45,13 @@ for FOLDER in $FOLDERS; do
   SUB_FILES=$(ls -Ap $BASE_DIR$FOLDER)
   for FILE in $SUB_FILES; do
     if [ ! -e $CONFIG_DIR$FOLDER$FILE -o $FORCE == true ]; then
-      cp -f $BASE_DIR$FOLDER$FILE $CONFIG_DIR$FOLDER$FILE
-      echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${GREEN}Success${NC}"
+      DIFF=$(diff $BASE_DIR$FOLDER$FILE $CONFIG_DIR$FOLDER$FILE)
+      if [ -n "$DIFF" ]; then
+        cp -f $BASE_DIR$FOLDER$FILE $CONFIG_DIR$FOLDER$FILE
+        echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${GREEN}Success${NC}"
+      else
+        echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${RED}Same file${NC}"
+      fi
     else
       echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${RED}File exists${NC}"
     fi
@@ -55,8 +60,13 @@ done
 
 for FILE in $FILES; do
   if [ ! -e $HOME_DIR$FILE -o $FORCE == true ]; then
-    cp -f $BASE_DIR$FILE $HOME_DIR$FILE
-    echo -e "${HOME_DIR}${FILE}: ${GREEN}Success${NC}"
+    DIFF=$(diff $BASE_DIR$FILE $HOME_DIR$FILE)
+    if [ -n "$DIFF" ]; then
+      cp -f $BASE_DIR$FILE $HOME_DIR$FILE
+      echo -e "${HOME_DIR}${FILE}: ${GREEN}Success${NC}"
+    else
+      echo -e "${HOME_DIR}${FILE}: ${RED}Same file${NC}"
+    fi
   else
     echo -e "${HOME_DIR}${FILE}: ${RED}File exists${NC}"
   fi
