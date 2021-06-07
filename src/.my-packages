@@ -11,6 +11,7 @@ efibootmgr
 feh
 filezilla
 firefox
+gcc
 gimp
 git
 grub
@@ -35,6 +36,7 @@ pulseaudio
 pulseaudio-alsa
 pulseaudio-jack
 redshift
+rustup
 scrot
 sudo
 ttf-dejavu
