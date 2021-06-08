@@ -1,0 +1,8 @@
+#!/bin/sh
+
+RAW=$(sensors -u)
+
+SPEED=$(echo "$RAW" | awk '/fan1_input:/{ printf "%dx", $NF; exit; }')
+TEMP=$(echo "$RAW" | awk '/temp1_input:/' | tr "\n" " " | awk '{ printf "%.2f°", $4; exit; }')
+
+echo -e ": $TEMP - $SPEED"

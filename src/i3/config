@@ -133,6 +133,21 @@ exec --no-startup-id redshift -O 5500
 
 # start i3bar to display a workspace bar
 bar {
+	i3bar_command i3bar --transparency
   status_command i3blocks
   position top
+  height 32
+ 	workspace_min_width 24
+
+	colors {
+		background #2c2c2c99
+		statusline #fafafa
+		separator #666666
+
+		focused_workspace  #00000099 #285577 #fafafa
+    active_workspace   #00000099 #2c2c2c #fafafa
+    inactive_workspace #00000099 #2c2c2c #888888
+    urgent_workspace   #00000099 #2c2c2c #fafafa
+    binding_mode       #00000099 #2c2c2c #fafafa
+	}
 }

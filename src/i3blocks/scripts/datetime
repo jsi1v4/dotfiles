@@ -1,0 +1,5 @@
+#!/bin/sh
+
+INFO=$(date +" %a, %d %b - %H:%M")
+
+echo ": $INFO"

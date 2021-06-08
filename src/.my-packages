@@ -31,6 +31,7 @@ noto-fonts-emoji
 ntfs-3g
 os-prober
 pacman-contrib
+pkgconf
 powerline-fonts
 pulseaudio
 pulseaudio-alsa
@@ -39,8 +40,10 @@ redshift
 rustup
 scrot
 sudo
+sysstat
 ttf-dejavu
 ttf-fira-sans
+ttf-font-awesome
 ufw
 unzip
 xclip
