@@ -1,13 +1,15 @@
 # My dotfiles 😎🖖
 
+![cover](assets/cover.png)
+
 ## Setup
 
 - arch-linux
-- i3-gaps
+- i3-wm
 - i3-blocks
 - zsh
 - oh-my-zsh
-- alacritty terminal
+- kitty terminal
 - micro-editor
 
 ## How to use
