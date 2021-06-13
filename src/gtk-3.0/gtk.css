@@ -1,4 +1,15 @@
 .background {
-	color: #fafafa;
-	background-color: #2c2c2c;
+  background-color: #2c2c2c;
+  color: #fafafa;
+}
+
+menu,
+.menu {
+  background-color: #2c2c2c;
+  color: #fafafa;
+}
+
+button,
+.button {
+  background-color: transparent;
 }
