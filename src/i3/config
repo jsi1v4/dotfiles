@@ -122,7 +122,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -u -i $HOME/pic
 exec --no-startup-id redshift -O 5500
 
 # no i3 border
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 0
 
 # start i3bar to display a workspace bar
 bar {
@@ -133,7 +133,7 @@ bar {
  		background #2c2c2c
 		statusline #fafafa
 
-    focused_workspace  #2c2c2c #285577 #fafafa
+		focused_workspace  #2c2c2c #285577 #fafafa
     active_workspace   #2c2c2c #2c2c2c #fafafa
     inactive_workspace #2c2c2c #2c2c2c #888888
     urgent_workspace   #2c2c2c #2c2c2c #fafafa

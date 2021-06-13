@@ -1,7 +1,6 @@
 acpid
 alsa-utils
 amd-ucode
-arc-gtk-theme
 base
 breeze-grub
 dhcpcd
@@ -21,7 +20,6 @@ i3status
 kitty
 linux
 linux-firmware
-lxappearance-gtk3
 man-db
 micro
 nano
