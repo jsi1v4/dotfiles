@@ -9,14 +9,8 @@ bindsym XF86AudioMute         exec --no-startup-id pamixer -t     && pkill -RTMI
 bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 3   && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -i 3   && pkill -RTMIN+1 i3blocks
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
 bindsym $mod+j focus left
@@ -112,42 +106,37 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# no i3 border
-for_window [class=".*"] border pixel 1
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
 
-# i3gaps config
-gaps inner 24
-gaps outer 16
-
-# enable transparency
-exec --no-startup-id xcompmgr &
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -nb #2c2c2c -nf #fafafa"
 
 # restore wallpaper config
 exec --no-startup-id feh --bg-fill $HOME/pictures/wallpapers/current.jpg
 
 # lock screen config
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -i $HOME/pictures/wallpapers/lock.png
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -n -u -i $HOME/pictures/wallpapers/lock.png
 
 # restore redshift
 exec --no-startup-id redshift -O 5500
 
+# no i3 border
+for_window [class=".*"] border pixel 1
+
 # start i3bar to display a workspace bar
 bar {
-	i3bar_command i3bar --transparency
   status_command i3blocks
   position top
-  height 32
- 	workspace_min_width 24
 
-	colors {
-		background #2c2c2c99
+ 	colors {
+ 		background #2c2c2c
 		statusline #fafafa
-		separator #666666
 
-		focused_workspace  #00000099 #285577 #fafafa
-    active_workspace   #00000099 #2c2c2c #fafafa
-    inactive_workspace #00000099 #2c2c2c #888888
-    urgent_workspace   #00000099 #2c2c2c #fafafa
-    binding_mode       #00000099 #2c2c2c #fafafa
+    focused_workspace  #2c2c2c #285577 #fafafa
+    active_workspace   #2c2c2c #2c2c2c #fafafa
+    inactive_workspace #2c2c2c #2c2c2c #888888
+    urgent_workspace   #2c2c2c #2c2c2c #fafafa
+    binding_mode       #2c2c2c #2c2c2c #fafafa
 	}
 }

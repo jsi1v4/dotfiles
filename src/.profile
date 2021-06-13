@@ -6,9 +6,11 @@ fi
 ## configs
 export LANG="en_US.UTF-8"
 export EDITOR="micro"
+export ARCHFLAGS="-arch x86_64"
+
+## path
 export PATH="${PATH}:/opt/vscode/bin"
 export PATH="${PATH}:/home/joseph/.yarn/bin"
-#export ARCHFLAGS="-arch x86_64"
 
 ## alias
 alias la="ls -la"
