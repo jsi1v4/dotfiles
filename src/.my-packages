@@ -21,12 +21,17 @@ kitty
 linux
 linux-firmware
 man-db
+mesa-demos
 micro
 nano
 netctl
 nodejs-lts-fermium
 noto-fonts-emoji
 ntfs-3g
+nvidia
+nvidia-settings
+nvidia-utils
+opencl-nvidia
 os-prober
 pacman-contrib
 pkgconf
@@ -36,6 +41,7 @@ pulseaudio-alsa
 pulseaudio-jack
 redshift
 rustup
+screenfetch
 scrot
 sudo
 sysstat
@@ -46,8 +52,8 @@ ufw
 unzip
 xclip
 xcompmgr
-xf86-video-nouveau
 xorg-server
+xorg-server-devel
 xorg-xdpyinfo
 xorg-xinit
 xorg-xrandr
