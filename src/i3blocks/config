@@ -4,13 +4,17 @@ separator=false
 separator_block_width=16
 interval=once
 
+[bandwidth]
+interval=5
+interface=enp8s0
+
 [cpu]
 interval=10
 
-[gpu]
+[ram]
 interval=10
 
-[ram]
+[gpu]
 interval=10
 
 [hdd]
