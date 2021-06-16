@@ -5,9 +5,9 @@ set $mod Mod4
 font pango:Fira Sans 10
 
 # set volume keybind
-bindsym XF86AudioMute         exec --no-startup-id pamixer -t     && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 3   && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -i 3   && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume  exec --no-startup-id amixer set Master playback 10%- toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume  exec --no-startup-id amixer set Master playback 10%+ && pkill -RTMIN+1 i3blocks
 
 # kill focused window
 bindsym $mod+Shift+q kill

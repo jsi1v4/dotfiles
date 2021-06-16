@@ -23,6 +23,9 @@ interval=10
 [sound]
 signal=1
 
+[mic]
+signal=2
+
 [datetime]
 interval=10
 
