@@ -3,4 +3,4 @@
 USAGE=$(mpstat | awk '/all/{ printf "%.2f%", (100 - $NF); exit; }')
 TEMP=$(sensors -u | awk '/temp1_input:/{ printf "%.2f°", $2; exit; }')
 
-echo -e ": $USAGE - $TEMP"
+echo -e " $USAGE - $TEMP"

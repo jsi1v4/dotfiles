@@ -39,4 +39,4 @@ else
   OUT=$(echo "${tx_kib}kb")
 fi
 
-echo ": $IN   $OUT "
+echo " $IN   $OUT "

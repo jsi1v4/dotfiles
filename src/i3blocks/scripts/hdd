@@ -5,4 +5,4 @@ RAW=$(df -h)
 USED=$(echo "$RAW" | awk '/\/dev\/sda2/{ print $3; exit; }')
 FREE=$(echo "$RAW" | awk '/\/dev\/sda2/{ print $4; exit; }')
 
-echo ": $USED/$FREE"
+echo " $USED/$FREE"

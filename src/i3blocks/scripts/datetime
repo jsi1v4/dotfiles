@@ -2,4 +2,4 @@
 
 INFO=$(date +" %a, %d %b - %H:%M")
 
-echo ": $INFO"
+echo " $INFO"

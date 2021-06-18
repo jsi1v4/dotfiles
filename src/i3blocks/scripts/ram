@@ -5,4 +5,4 @@ RAW=$(free -h)
 USAGE=$(echo "$RAW" | awk ' /Mem:/{print $3; exit;}')
 FREE=$(echo "$RAW" | awk ' /Mem:/{print $NF; exit;}')
 
-echo -e ": $USAGE/$FREE"
+echo -e " $USAGE/$FREE"
