@@ -6,7 +6,7 @@ font pango:Fira Sans 10
 
 # set volume keybind
 bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioLowerVolume  exec --no-startup-id amixer set Master playback 10%- toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume  exec --no-startup-id amixer set Master playback 10%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioRaiseVolume  exec --no-startup-id amixer set Master playback 10%+ && pkill -RTMIN+1 i3blocks
 
 # kill focused window
@@ -134,7 +134,7 @@ bar {
  		background #2c2c2c
 		statusline #fafafa
 
-		focused_workspace  #2c2c2c #285577 #fafafa
+		focused_workspace  #2c2c2c #2188D7 #fafafa
     active_workspace   #2c2c2c #2c2c2c #fafafa
     inactive_workspace #2c2c2c #2c2c2c #888888
     urgent_workspace   #2c2c2c #2c2c2c #fafafa

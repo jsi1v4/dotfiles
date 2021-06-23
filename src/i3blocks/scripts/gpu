@@ -1,8 +1,9 @@
 #!/bin/sh
 
-RAW=$(sensors -u)
+RAW=$(nvidia-smi stats -i 0 -c 1 -d temp,gpuUtil,memUtil)
 
-SPEED=$(echo "$RAW" | awk '/fan1_input:/{ printf "%dx", $NF; exit; }')
-TEMP=$(echo "$RAW" | awk '/temp1_input:/' | tr "\n" " " | awk '{ printf "%.2f°", $4; exit; }')
+USAGE=$(echo "$RAW" | awk '/gpuUtil/{ printf "%d%", $NF; exit; }')
+MEM=$(echo "$RAW" | awk '/memUtil/{ printf "%d%", $NF; exit; }')
+TEMP=$(echo "$RAW" | awk '/temp/{ printf "%d°", $NF; exit; }')
 
-echo -e " $TEMP - $SPEED"
+echo -e " $USAGE - $MEM - $TEMP"

@@ -1,9 +1,18 @@
 #!/bin/sh
 
+case $BLOCK_BUTTON in
+  1) i=$(amixer set Capture toggle) ;;  # left click
+  4) i=$(amixer set Capture 10%+) ;;   # scroll up
+  5) i=$(amixer set Capture 10%-) ;;   # scroll down
+esac
+
 MUTED=$(amixer get Capture | awk '/%/{print ($NF=="[off]" ? 1 : 0); exit;}')
+SOUND_LEVEL=$(amixer -M get Capture | awk -F"[][]" '/%/ { print $2 }' | awk -F"%" 'BEGIN{tot=0; i=0} {i++; tot+=$1} END{printf("%s\n", tot/i) }')
 
 if [ "$MUTED" = "1" ];then
-	echo ""
+	ICON=""
 else
-	echo ""
+	ICON=""
 fi
+
+echo "$ICON" "$SOUND_LEVEL" | awk '{ printf(" %s %3s%% \n", $1, $2) }'

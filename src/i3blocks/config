@@ -26,6 +26,12 @@ signal=1
 [mic]
 signal=2
 
+[screensaver]
+signal=3
+
+[redshift]
+signal=4
+
 [datetime]
 interval=10
 

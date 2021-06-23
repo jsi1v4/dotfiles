@@ -2,8 +2,15 @@
 
 VOLUME_MUTE=""
 VOLUME_LOW=""
-VOLUME_MID=""
-VOLUME_HIGH=""
+VOLUME_MID=""
+VOLUME_HIGH=""
+
+case $BLOCK_BUTTON in
+  1) i=$(amixer set Master toggle) ;; # left click
+  4) i=$(amixer set Master 10%+) ;;  # scroll up
+  5) i=$(amixer set Master 10%-) ;;  # scroll down
+esac
+
 SOUND_LEVEL=$(amixer -M get Master | awk -F"[][]" '/%/ { print $2 }' | awk -F"%" 'BEGIN{tot=0; i=0} {i++; tot+=$1} END{printf("%s\n", tot/i) }')
 MUTED=$(amixer get Master | awk ' /%/{print ($NF=="[off]" ? 1 : 0); exit;}')
 

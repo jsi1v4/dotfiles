@@ -1,0 +1,24 @@
+#!/bin/sh
+
+STATUS=$(xset q | awk '/timeout:/{ printf $2; exit; }')
+
+toggle() {
+	if [ "$STATUS" = "0" ];then
+		xset s on
+	else
+		xset s off
+	fi
+}
+
+case $BLOCK_BUTTON in
+  1) toggle ;; # left click
+  3) toggle ;; # right click
+esac
+
+STATUS=$(xset q | awk '/timeout:/{ printf $2; exit; }')
+
+if [ "$STATUS" = "0" ];then
+	echo ""
+else
+	echo ""
+fi

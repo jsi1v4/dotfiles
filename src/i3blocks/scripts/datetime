@@ -1,5 +1,5 @@
 #!/bin/sh
 
-INFO=$(date +" %a, %d %b - %H:%M")
+INFO=$(date +" %a, %d %b[%m] - %H:%M")
 
 echo " $INFO"
