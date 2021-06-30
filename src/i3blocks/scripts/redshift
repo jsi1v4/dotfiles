@@ -4,11 +4,13 @@ STATUS=1
 
 on() {
 	$(redshift -O 5500)
+	$(feh --bg-fill $HOME/pictures/wallpapers/current.jpg)
 	STATUS=1
 }
 
 off() {
 	$(redshift -x)
+	$(feh --bg-fill $HOME/pictures/wallpapers/alt.jpg)
 	STATUS=0
 }
 

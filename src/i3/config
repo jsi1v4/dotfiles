@@ -46,18 +46,17 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
-# Define names for default workspaces for which we configure key bindings later on.
+# define names for default workspaces for which we configure key bindings later on.
 
-set $ws1 "Control"
-set $ws2 "Search"
-set $ws3 "Code"
-set $ws4 "Design"
-set $ws5 "..."
-set $ws6 "..."
-set $ws7 "..."
-set $ws8 "..."
-set $ws9 "..."
-set $ws10 "..."
+set $ws1 "[1] Control"
+set $ws2 "[2] Search"
+set $ws3 "[3] Code"
+set $ws4 "[4] Design"
+set $ws5 "[5] Video"
+set $ws6 "[6] ..."
+set $ws7 "[7] ..."
+set $ws8 "[8] ..."
+set $ws9 "[9] ..."
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -69,7 +68,6 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -81,7 +79,6 @@ bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -110,7 +107,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Return exec i3-sensible-terminal
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -b -nb #2c2c2c -nf #fafafa"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -b -fn 'Fira Sans-12' -nb '#2c2c2c' -nf '#fafafa'"
 
 # restore wallpaper config
 exec --no-startup-id feh --bg-fill $HOME/pictures/wallpapers/current.jpg
@@ -123,6 +120,9 @@ exec --no-startup-id redshift -O 5500
 
 # no i3 border
 for_window [class=".*"] border pixel 0
+
+# ws "video" gaps config
+workspace $ws5 gaps outer 128
 
 # start i3bar to display a workspace bar
 bar {
