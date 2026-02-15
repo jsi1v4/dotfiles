@@ -27,9 +27,5 @@ fi
 ## change keyboard variant
 setxkbmap -layout $layout -variant $variant
 
-## use nvidia settings
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
-
 ## init i3 wm
 exec i3

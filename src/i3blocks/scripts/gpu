@@ -1,9 +1,28 @@
 #!/bin/sh
 
-RAW=$(nvidia-smi stats -i 0 -c 1 -d temp,gpuUtil,memUtil)
+CARD="card1"
+HW="/sys/class/drm/$CARD/device"
 
-USAGE=$(echo "$RAW" | awk '/gpuUtil/{ printf "%d%", $NF; exit; }')
-MEM=$(echo "$RAW" | awk '/memUtil/{ printf "%d%", $NF; exit; }')
-TEMP=$(echo "$RAW" | awk '/temp/{ printf "%d°", $NF; exit; }')
+# GPU Usage (%)
+USAGE=$(cat $HW/gpu_busy_percent 2>/dev/null | awk '{printf "%d%%", $1}')
 
-echo -e " $USAGE - $MEM - $TEMP"
+# Memória VRAM usada (%)
+USED=$(cat $HW/mem_info_vram_used 2>/dev/null)
+TOTAL=$(cat $HW/mem_info_vram_total 2>/dev/null)
+
+if [ -n "$USED" ] && [ -n "$TOTAL" ] && [ "$TOTAL" -ne 0 ]; then
+    MEM=$(awk -v u="$USED" -v t="$TOTAL" 'BEGIN { printf "%d%%", (u/t)*100 }')
+else
+    MEM="N/A"
+fi
+
+# Temperatura (°C)
+TEMP_RAW=$(cat $HW/hwmon/hwmon*/temp1_input 2>/dev/null | head -n1)
+
+if [ -n "$TEMP_RAW" ]; then
+    TEMP=$(awk -v t="$TEMP_RAW" 'BEGIN { printf "%d°", t/1000 }')
+else
+    TEMP="N/A"
+fi
+
+echo " $USAGE - $MEM - $TEMP"

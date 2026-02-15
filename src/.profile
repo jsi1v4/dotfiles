@@ -9,8 +9,7 @@ export EDITOR="micro"
 export ARCHFLAGS="-arch x86_64"
 
 ## path
-export PATH="${PATH}:/opt/vscode/bin"
-export PATH="${PATH}:/home/joseph/.yarn/bin"
+export PATH="${PATH}"
 
 ## alias
 alias la="ls -la"

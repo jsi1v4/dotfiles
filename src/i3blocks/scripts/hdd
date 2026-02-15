@@ -1,8 +1,14 @@
 #!/bin/sh
 
-RAW=$(df -h)
+TARGET="/"
 
-USED=$(echo "$RAW" | awk '/\/dev\/sda2/{ print $3; exit; }')
-FREE=$(echo "$RAW" | awk '/\/dev\/sda2/{ print $4; exit; }')
+RAW=$(btrfs filesystem usage -b $TARGET 2>/dev/null)
 
-echo " $USED/$FREE"
+USED=$(echo "$RAW" | awk '/Used:/ {print $2; exit}')
+TOTAL=$(echo "$RAW" | awk '/Device size:/ {print $3; exit}')
+
+# Converte bytes → GiB
+USED_G=$(awk -v u="$USED" 'BEGIN { printf "%.1fG", u/1024/1024/1024 }')
+TOTAL_G=$(awk -v t="$TOTAL" 'BEGIN { printf "%.1fG", t/1024/1024/1024 }')
+
+echo " $USED_G/$TOTAL_G"
