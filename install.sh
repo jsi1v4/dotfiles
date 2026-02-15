@@ -1,16 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
 FORCE=false
-BASE_DIR=$(dirname "$0")/src/
-FOLDERS=$(ls -Ap $BASE_DIR | grep /)
-FILES=$(ls -Ap $BASE_DIR | grep -v /)
-
-HOME_DIR=$HOME/
-CONFIG_DIR=$HOME/.config/
+BASE_DIR="$(dirname "$0")/src"
+HOME_DIR="$HOME"
+CONFIG_DIR="$HOME/.config"
 
 show_help () {
 cat << EOF
@@ -24,51 +21,49 @@ cat << EOF
 EOF
 }
 
-for PARAM in $*; do
-  if [ "$PARAM" == "--help" -o "$PARAM" == "-h" ]; then
-    show_help
-    exit
-  fi
-  if [ "$PARAM" == "--force" -o "$PARAM" == "-f" ]; then
-    FORCE=true
-  fi
+for PARAM in "$@"; do
+  case "$PARAM" in
+    --help|-h) show_help; exit 0 ;;
+    --force|-f) FORCE=true ;;
+  esac
 done
 
-if [ $FORCE == true ]; then
-  read -p "Force parameter, will overwrite the files. Do you really want to continue? [yes, no]: " CONTINUE
-  if [ "$CONTINUE" != "yes" -a "$CONTINUE" != "y" ]; then
-    exit
-  fi
+if [ "$FORCE" = true ]; then
+  printf "Force parameter, will overwrite files. Continue? [yes/no]: "
+  read CONTINUE
+  case "$CONTINUE" in
+    yes|y) ;;
+    *) exit 0 ;;
+  esac
 fi
 
-for FOLDER in $FOLDERS; do
-  SUB_FILES=$(ls -Ap $BASE_DIR$FOLDER)
-  for FILE in $SUB_FILES; do
-    if [ ! -e $CONFIG_DIR$FOLDER$FILE -o $FORCE == true ]; then
-      DIFF=$(diff -r $BASE_DIR$FOLDER$FILE $CONFIG_DIR$FOLDER$FILE)
-      if [ -z "$DIFF" ]; then
-        mkdir -p $CONFIG_DIR$FOLDER
-        cp -rf $BASE_DIR$FOLDER$FILE $CONFIG_DIR$FOLDER$FILE
-        echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${GREEN}Success${NC}"
-      else
-        echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${RED}Same file${NC}"
-      fi
-    else
-      echo -e "${CONFIG_DIR}${FOLDER}${FILE}: ${RED}File exists${NC}"
-    fi
-  done
-done
+# Percorre todos os arquivos dentro de src (recursivo)
+find "$BASE_DIR" -type f | while read -r SRC_FILE; do
+  REL_PATH="${SRC_FILE#$BASE_DIR/}"
 
-for FILE in $FILES; do
-  if [ ! -e $HOME_DIR$FILE -o $FORCE == true ]; then
-    DIFF=$(diff $BASE_DIR$FILE $HOME_DIR$FILE)
-    if [ -z "$DIFF" ]; then
-      cp -rf $BASE_DIR$FILE $HOME_DIR$FILE
-      echo -e "${HOME_DIR}${FILE}: ${GREEN}Success${NC}"
-    else
-      echo -e "${HOME_DIR}${FILE}: ${RED}Same file${NC}"
-    fi
-  else
-    echo -e "${HOME_DIR}${FILE}: ${RED}File exists${NC}"
+  case "$REL_PATH" in
+    .config/*)
+      DEST="$HOME/$REL_PATH"
+      ;;
+    *)
+      DEST="$HOME/$REL_PATH"
+      ;;
+  esac
+
+  DEST_DIR="$(dirname "$DEST")"
+
+  if [ -e "$DEST" ] && [ "$FORCE" != true ]; then
+    printf "%s: ${RED}File exists${NC}\n" "$DEST"
+    continue
   fi
+
+  if [ -e "$DEST" ] && diff -q "$SRC_FILE" "$DEST" >/dev/null 2>&1; then
+    printf "%s: ${RED}Same file${NC}\n" "$DEST"
+    continue
+  fi
+
+  mkdir -p "$DEST_DIR"
+  cp -f "$SRC_FILE" "$DEST"
+
+  printf "%s: ${GREEN}Success${NC}\n" "$DEST"
 done

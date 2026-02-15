@@ -5,28 +5,33 @@ VOLUME_LOW=""
 VOLUME_MID=""
 VOLUME_HIGH=""
 
+SINK="@DEFAULT_AUDIO_SINK@"
+
 case $BLOCK_BUTTON in
-  1) i=$(amixer set Master toggle) ;;        # left click
-  4) i=$(amixer set Master 10%+) ;; # scroll up
-  5) i=$(amixer set Master 10%-) ;; # scroll down
+  1) wpctl set-mute $SINK toggle ;;   # left click
+  4) wpctl set-volume $SINK 10%+ ;;   # scroll up
+  5) wpctl set-volume $SINK 10%- ;;   # scroll down
 esac
 
-SOUND_LEVEL=$(amixer -M get Master | awk -F"[][]" '/%/ { print $2 }' | awk -F"%" 'BEGIN{tot=0; i=0} {i++; tot+=$1} END{printf("%s\n", tot/i) }')
-MUTED=$(amixer get Master | awk ' /%/{print ($NF=="[off]" ? 1 : 0); exit;}')
+# Pega volume e estado
+INFO=$(wpctl get-volume $SINK)
 
-if [ "$MUTED" = "1" ]
-then
+# Extrai volume (float 0.00-1.00 → %)
+SOUND_LEVEL=$(echo "$INFO" | awk '{printf "%d", $2 * 100}')
+
+# Detecta mute
+echo "$INFO" | grep -q MUTED && MUTED=1 || MUTED=0
+
+if [ "$MUTED" = "1" ]; then
     ICON="$VOLUME_MUTE"
 else
-    if [ "$SOUND_LEVEL" -lt 34 ]
-    then
+    if [ "$SOUND_LEVEL" -lt 34 ]; then
         ICON="$VOLUME_LOW"
-    elif [ "$SOUND_LEVEL" -lt 67 ]
-    then
+    elif [ "$SOUND_LEVEL" -lt 67 ]; then
         ICON="$VOLUME_MID"
     else
         ICON="$VOLUME_HIGH"
     fi
 fi
 
-echo "$ICON" "$SOUND_LEVEL" | awk '{ printf(" %s %3s%% \n", $1, $2) }'
+printf " %s %3s%% \n" "$ICON" "$SOUND_LEVEL"

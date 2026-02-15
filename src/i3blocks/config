@@ -6,7 +6,7 @@ interval=once
 
 [bandwidth]
 interval=5
-interface=enp8s0
+interface=eno1
 
 [cpu]
 interval=10
